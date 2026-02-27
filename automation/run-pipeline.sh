@@ -18,7 +18,7 @@ echo "Step 2 - Confirm project location"
 pwd
 
 echo "Step 3 - Inspect project structure"
-ls - R
+ls -R
 
 echo "Pipeline simulation complete successfully"
 
