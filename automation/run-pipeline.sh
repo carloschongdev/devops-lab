@@ -1,46 +1,57 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Simulación de ejecución de pipeline
 # Este script representa lo que un sistema CI ejecutará automáticamente.
 # Aún se ejecuta manualmente en esta fase del laboratorio.
 
-echo "Running manual CI pipeline simulation"
+set -euo pipefall
 
-echo "Project: devops-lab"
-date
+PIPELINE_NAME="DEVOPS-LAB PIPELINE"
+RUN_ID=$(date +"%Y%m%d-%H%M%S")
 
-echo "=== PIPELINE START ==="
+log() {
+  echo "[${PIPELINE_NAME}] [RUN:${RUN_ID}] $1"
+}
 
-echo "Step 1 - Validate repository state"
-git status
+stage() {
+    STAGE_NAME="1"
+    log "========== STAGE: ${STAGE_NAME} =========="
+}
 
-echo "Step 2 - Confirm project location"
-pwd
+init() {
+    stage "INIT"
+    log "Preparing execution environment"
+    pwd
+} 
 
-echo "Step 3 - Inspect project structure"
-ls -R
+validate()  {
+    stage "VALIDATE"
+    log "Running repository validation checks"
+    test -f docker/Dockerfile
+}
 
-echo "Pipeline simulation complete successfully"
+build() {
+    stage"BUILD"
+    log "Simulating container build"
+    echo "docker build would run here"
+}
 
-set -e
+test_phase() {
+    stage "TEST"
+    log "Simulating validation test"
+}
 
-echo "==Pre-run validation phase =="
+report() {
+    stage "REPORT"
+    log "Pipeline completed successfully"
+}
 
-if [ ! -f "Licence"]; then
-    echo "ERROR: Licence not found. Run script from project root."
-    exit 1
-fi
+main() {
+    init
+    validate
+    build
+    test_phase
+    report
+}
 
-if [ ! -d "automation" ]; then
-    echo "ERROR: automation directory missing."
-    exit 1
-fi
-
-if ! command -v git >/dev/null 2/&1; then 
-    echo "ERROR: git is not available in PATH."
-    exit 1
-fi
-
-echo "Environment validation passed."
-echo "Starting pipeline..."
-
+main "$@"
