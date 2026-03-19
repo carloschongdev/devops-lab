@@ -21,11 +21,15 @@ jobs:
 
       - name: Run container test
         run: |
+          docker rm -f test-container || true
+
           docker run -d -p 8080:80 --name test-container devops-lab-web
           sleep 5
 
           curl -f http://localhost:8080 || exit 1
           
+          docker logs test-container
+
           docker stop test-container
           docker rm test-container
           
