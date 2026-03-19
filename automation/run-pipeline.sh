@@ -141,12 +141,31 @@ build() {
     end_stage
 }
 
-test_phase() {
+test_stage() {
     stage "TEST"
     log INFO "Simulating validation test"
-    echo "Running dummy test..."
-    false
-    sleep 1
+
+    CONTAINER_NAME="pipeline-test-container"
+    
+    # Limpiar si existe previo
+    docker rm -f "$CONTAINER_NAME" >/dev/null 2>&1 || true
+
+    # Ejecutar contenedor
+    docker run -d -p 8081:80 --name "$CONTAINER_NAME" devops-lab-web
+
+    sleep 3
+    
+    # Validar que esta ocurriendo
+    if docker ps | grep -q "$CONTAINER_NAME"; then
+        log INFO "Container is running correctly"
+    else
+        log ERROR "Container faile to start"
+        exit 1
+    fi
+    # Limpieza
+    docker stop "$CONTAINER_NAME"
+    docker rm "$CONTAINER_NAME"
+
     end_stage
 }
 
@@ -253,7 +272,7 @@ main() {
     init
     validate
     build
-    test_phase
+    test_stage
     
     PIPELINE_END_TIME=$(date +%s)
     TOTAL_DURATION=$((PIPELINE_END_TIME - PIPELINE_START_TIME))
