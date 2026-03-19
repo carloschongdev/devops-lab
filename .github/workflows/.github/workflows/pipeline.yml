@@ -1,0 +1,28 @@
+name: DevOps Lab Pipeline
+
+on:
+  branches:
+    - main
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        run: docker --version
+
+      - name: Build Docker image
+        run: docker build -t devops-lab-web ./docker
+
+      - name: Run container test
+        run: |
+          docker run -d -p 8080:80 --name test-container devops-lab-web
+          sleep 5
+          docker ps
+          docker stop test-container
+          docker rm test-container
+          

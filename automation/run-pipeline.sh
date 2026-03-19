@@ -135,15 +135,15 @@ validate()  {
 
 build() {
     stage "BUILD"
-    log INFO "Simulating container build"
-    echo "docker build would run here"
+    log INFO "Building Docker image"
+    docker build -t devops-lab-web ./docker
     sleep 2
     end_stage
 }
 
 test_stage() {
     stage "TEST"
-    log INFO "Simulating validation test"
+    log INFO "Running container validation test"
 
     CONTAINER_NAME="pipeline-test-container"
     
