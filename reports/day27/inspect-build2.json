@@ -1,0 +1,73 @@
+[
+    {
+        "Id": "sha256:f608f3e271a2d57dc388753575c7b776d624d228a1833ad720f26354dbd22c06",
+        "RepoTags": [
+            "devops-lab:build-2"
+        ],
+        "RepoDigests": [
+            "devops-lab@sha256:f608f3e271a2d57dc388753575c7b776d624d228a1833ad720f26354dbd22c06"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-04-10T19:31:20.807500919Z",
+        "Config": {
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NGINX_VERSION=1.29.8",
+                "PKG_RELEASE=1",
+                "DYNPKG_RELEASE=1",
+                "NJS_VERSION=0.9.6",
+                "NJS_RELEASE=1",
+                "ACME_VERSION=0.3.1"
+            ],
+            "Entrypoint": [
+                "/docker-entrypoint.sh"
+            ],
+            "Cmd": [
+                "nginx",
+                "-g",
+                "daemon off;"
+            ],
+            "WorkingDir": "/",
+            "Labels": {
+                "maintainer": "NGINX Docker Maintainers <docker-maint@nginx.com>"
+            },
+            "StopSignal": "SIGQUIT"
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 25830755,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:45f3ea5848e8a25ca27718b640a21ffd8c8745d342a24e1d4ddfc8c449b0a724",
+                "sha256:acd59487b4447f446e8db98398f05828d306a80826ad840a204444a7a76cdbbd",
+                "sha256:ff7b51ca31fc1c5a4ecfd6421659249923d58e9899b49c470cb1c21cabb50dd4",
+                "sha256:16f9a217364874f8457f31cc9ca070c15e7616248dcde9d94e17e897385f2dc2",
+                "sha256:365c40dc38efb74efaa13adf8afdb7a887f02dcc34eb49c3a287e79b63c1a9af",
+                "sha256:1ebc28ccfea5a71353b1d150436000ab55288a7a662237a4760396479ef1c4f2",
+                "sha256:a08008a9f42571ca0ce9330fe61ee1572608054767fb5f403036e8f24db5082d",
+                "sha256:efb437bf027fb1ce024930963a5252fbd38ddbf423d475ef4dcfd4eec41ab2d6",
+                "sha256:ff05ed0961c35afe4d1b7b0720d6f6bb4c3b3c06c8a252128f7275076af661c0"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-04-10T19:45:55.335933625Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:f608f3e271a2d57dc388753575c7b776d624d228a1833ad720f26354dbd22c06",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "1pv7vffhqcj20tsxgzyar993y",
+                    "CreatedAt": "2026-04-10T19:45:55.34159925Z"
+                }
+            ]
+        }
+    }
+]
