@@ -1,0 +1,1 @@
+Total: 22 (UNKNOWN: 4, LOW: 6, MEDIUM: 9, HIGH: 3, CRITICAL: 0)
